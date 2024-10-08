@@ -1,9 +1,16 @@
 package org.example.desktoptamagotchi;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class IndexController {
+    @FXML
+    private Node root;
+
     @FXML
     private TextField textField;
 
@@ -21,9 +28,22 @@ public class IndexController {
     }
 
 
-    // Helpers
+    // Internal helpers
 
     private void handleSubmit() {
-        System.out.println(textField.getText());
+        if (textField.getText().isEmpty()) {
+            return;
+        }
+
+        // Set the singleton
+        NameHolder.getInstance().setName(textField.getText());
+
+        // Switch scene
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tamagotchi-view.fxml"));
+            root.getScene().setRoot(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
