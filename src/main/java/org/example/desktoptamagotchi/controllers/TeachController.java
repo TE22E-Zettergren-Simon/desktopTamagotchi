@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.example.desktoptamagotchi.models.Tamagotchi;
 import org.example.desktoptamagotchi.models.TamagotchiHolder;
 
@@ -28,6 +29,9 @@ public class TeachController implements Initializable {
     @FXML
     private void onSubmit() {
         String phrase = textField.getText();
+        if (phrase.isEmpty()) return;
+
         tamagotchi.teachPhrase(phrase);
+        ((Stage) label.getScene().getWindow()).close(); // Closes the alert window
     }
 }

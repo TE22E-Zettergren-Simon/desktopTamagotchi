@@ -18,12 +18,12 @@ public class IndexController {
 
     @FXML
     private void onSubmit() {
-        if (textField.getText().isEmpty()) {
+        String name = textField.getText();
+        if (name.isEmpty()) {
             return;
         }
 
         // Set the singleton
-        String name = textField.getText();
         TamagotchiHolder.getInstance().setTamagotchi(new Tamagotchi(name));
 
         // Switch scene

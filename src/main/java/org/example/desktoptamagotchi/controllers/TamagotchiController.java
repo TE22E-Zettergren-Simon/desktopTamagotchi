@@ -25,7 +25,8 @@ public class TamagotchiController implements Initializable, Runnable {
 
     Tamagotchi tamagotchi;
 
-    // Basically a constructor
+
+    // Called when a fxml tag connects to this controller
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get the name from the singleton
@@ -53,10 +54,11 @@ public class TamagotchiController implements Initializable, Runnable {
             tamagotchi.tick();
             Platform.runLater(this::updateLabels);
 
-            // Platform.runLater schedules updateLabels to run later on the application thread
+            // Platform.runLater schedules a method to run later on the application thread
             // this::updateLabels is a method reference
         }
 
+        //TODO: Add death logic
         System.out.println("Tamagotchi stopped");
     }
 

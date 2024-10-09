@@ -1,6 +1,6 @@
 package org.example.desktoptamagotchi.models;
 
-// A singleton used for sharing the name of a Tamagotchi between controllers
+// A singleton used for sharing the Tamagotchi between controllers
 public final class TamagotchiHolder {
     private Tamagotchi tamagotchi;
     private static final TamagotchiHolder instance = new TamagotchiHolder();
