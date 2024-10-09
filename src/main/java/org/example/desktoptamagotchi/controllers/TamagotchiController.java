@@ -51,7 +51,7 @@ public class TamagotchiController implements Initializable, Runnable {
             // Wait some time before updating
             try {
                 //FIXME: Ticks faster for testing purposes
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 break;
             }
@@ -65,8 +65,7 @@ public class TamagotchiController implements Initializable, Runnable {
             // this::updateLabels is a method reference
         }
 
-        //TODO: Add death logic
-        System.out.println("Tamagotchi stopped");
+        switchToDeadScene();
     }
 
 
@@ -123,9 +122,18 @@ public class TamagotchiController implements Initializable, Runnable {
         boredomLabel.setText("Boredom: " + tamagotchi.getBoredom());
 
         // Get and set the appropriate image
-        String filepath = "images/tamagotchi_" + tamagotchi.getState().toString() + ".png";
-        InputStream inputStream = MainApplication.class.getResourceAsStream(filepath);
+        String imagePath = "images/tamagotchi_" + tamagotchi.getState().toString() + ".png";
+        InputStream inputStream = MainApplication.class.getResourceAsStream(imagePath);
         Image image = new Image(inputStream);
         imageView.setImage(image);
+    }
+
+    private void switchToDeadScene() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/dead-view.fxml"));
+            nameLabel.getScene().setRoot(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

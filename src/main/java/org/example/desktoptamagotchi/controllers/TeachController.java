@@ -19,6 +19,7 @@ public class TeachController implements Initializable {
 
     Tamagotchi tamagotchi;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();

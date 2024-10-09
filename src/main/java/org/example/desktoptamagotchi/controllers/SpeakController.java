@@ -14,6 +14,7 @@ public class SpeakController implements Initializable {
     @FXML
     private Label label;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Tamagotchi tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
