@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import org.example.desktoptamagotchi.MainApplication;
-import org.example.desktoptamagotchi.models.NameHolder;
+import org.example.desktoptamagotchi.models.Tamagotchi;
+import org.example.desktoptamagotchi.models.TamagotchiHolder;
 
 import java.io.IOException;
 
@@ -34,7 +35,8 @@ public class IndexController {
         }
 
         // Set the singleton
-        NameHolder.getInstance().setName(textField.getText());
+        String name = textField.getText();
+        TamagotchiHolder.getInstance().setTamagotchi(new Tamagotchi(name));
 
         // Switch scene
         try {

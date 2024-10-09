@@ -2,11 +2,16 @@ package org.example.desktoptamagotchi.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import org.example.desktoptamagotchi.models.NameHolder;
+import javafx.stage.Stage;
+import org.example.desktoptamagotchi.MainApplication;
+import org.example.desktoptamagotchi.models.TamagotchiHolder;
 import org.example.desktoptamagotchi.models.Tamagotchi;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,11 +29,9 @@ public class TamagotchiController implements Initializable, Runnable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get the name from the singleton
-        String name = NameHolder.getInstance().getName();
+        tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
 
-        tamagotchi = new Tamagotchi(name);
-
-        nameLabel.setText(name);
+        nameLabel.setText(tamagotchi.getName());
         updateLabels();
 
         new Thread(this).start();
@@ -69,8 +72,18 @@ public class TamagotchiController implements Initializable, Runnable {
 
     @FXML
     private void onSpeakButtonClick() {
-        //FIXME: Temporary
-        System.out.println(tamagotchi.speak());
+        // Create a new window and open it
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/speak-alert.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 200, 80);
+
+            Stage stage = new Stage();
+            stage.setTitle("Speak");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         updateLabels();
     }
