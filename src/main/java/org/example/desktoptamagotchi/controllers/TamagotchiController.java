@@ -6,12 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.desktoptamagotchi.MainApplication;
 import org.example.desktoptamagotchi.models.TamagotchiHolder;
 import org.example.desktoptamagotchi.models.Tamagotchi;
+import org.example.desktoptamagotchi.models.TamagotchiState;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +26,8 @@ public class TamagotchiController implements Initializable, Runnable {
     private Label hungerLabel;
     @FXML
     private Label boredomLabel;
+    @FXML
+    private ImageView imageView;
 
     Tamagotchi tamagotchi;
 
@@ -29,7 +35,7 @@ public class TamagotchiController implements Initializable, Runnable {
     // Called when a fxml tag connects to this controller
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Get the name from the singleton
+        // Get the tamagotchi from the singleton
         tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
 
         nameLabel.setText(tamagotchi.getName());
@@ -41,7 +47,7 @@ public class TamagotchiController implements Initializable, Runnable {
 
     @Override
     public void run() {
-        while (tamagotchi.isAlive()) {
+        while (tamagotchi.getState() != TamagotchiState.DEAD) {
             // Wait some time before updating
             try {
                 //FIXME: Ticks faster for testing purposes
@@ -55,6 +61,7 @@ public class TamagotchiController implements Initializable, Runnable {
             Platform.runLater(this::updateLabels);
 
             // Platform.runLater schedules a method to run later on the application thread
+            // This is needed as JavaFX doesn't allow other threads to update scenes
             // this::updateLabels is a method reference
         }
 
@@ -114,5 +121,11 @@ public class TamagotchiController implements Initializable, Runnable {
     private void updateLabels() {
         hungerLabel.setText("Hunger: " + tamagotchi.getHunger());
         boredomLabel.setText("Boredom: " + tamagotchi.getBoredom());
+
+        // Get and set the appropriate image
+        String filepath = "images/tamagotchi_" + tamagotchi.getState().toString() + ".png";
+        InputStream inputStream = MainApplication.class.getResourceAsStream(filepath);
+        Image image = new Image(inputStream);
+        imageView.setImage(image);
     }
 }

@@ -8,7 +8,7 @@ public class Tamagotchi {
     private int hunger = 3;
     private int boredom = 3;
     private final ArrayList<String> vocabulary = new ArrayList<>();
-    private boolean isAlive = true;
+    private TamagotchiState state = TamagotchiState.GOOD;
 
     private static final Random generator = new Random();
 
@@ -25,7 +25,7 @@ public class Tamagotchi {
         hunger++;
         boredom++;
 
-        isAlive = hunger < 10 && boredom < 10;
+        updateState();
     }
 
 
@@ -34,11 +34,13 @@ public class Tamagotchi {
     // Reduce the Tamagotchi's hunger
     public void feed() {
         reduceHunger();
+        updateState();
     }
 
     // Get a random word from the Tamagotchi and reduce its boredom
     public String speak() {
         reduceBoredom();
+        updateState();
 
         int index = generator.nextInt(vocabulary.size());
         return vocabulary.get(index);
@@ -47,6 +49,7 @@ public class Tamagotchi {
     // Add a new phrase to the Tamagotchi's vocabulary and reduce its boredom
     public void teachPhrase(String newPhrase) {
         reduceBoredom();
+        updateState();
 
         vocabulary.add(newPhrase);
     }
@@ -68,6 +71,19 @@ public class Tamagotchi {
         if (boredom < 0) boredom = 0;
     }
 
+    // Updates the state of the Tamagotchi dependent on its hunger and boredom
+    private void updateState() {
+        if (hunger >= 10 || boredom >= 10) {
+            state = TamagotchiState.DEAD;
+        } else if (hunger >= 8 || boredom >= 8) {
+            state = TamagotchiState.BAD;
+        } else if (hunger >= 5 || boredom >= 5) {
+            state = TamagotchiState.OKAY;
+        } else {
+            state = TamagotchiState.GOOD;
+        }
+    }
+
 
     // Getters
 
@@ -83,7 +99,7 @@ public class Tamagotchi {
         return boredom;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    public TamagotchiState getState() {
+        return state;
     }
 }
