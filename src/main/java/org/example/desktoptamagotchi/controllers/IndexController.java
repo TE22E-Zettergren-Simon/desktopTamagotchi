@@ -17,19 +17,7 @@ public class IndexController {
     // User actions
 
     @FXML
-    private void onTextFieldEnter() {
-        handleSubmit();
-    }
-
-    @FXML
-    private void onSubmitButtonClick() {
-        handleSubmit();
-    }
-
-
-    // Internal helpers
-
-    private void handleSubmit() {
+    private void onSubmit() {
         if (textField.getText().isEmpty()) {
             return;
         }

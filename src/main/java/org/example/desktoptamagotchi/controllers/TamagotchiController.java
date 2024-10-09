@@ -75,7 +75,7 @@ public class TamagotchiController implements Initializable, Runnable {
         // Create a new window and open it
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/speak-alert.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 200, 80);
+            Scene scene = new Scene(fxmlLoader.load(), 300, 120);
 
             Stage stage = new Stage();
             stage.setTitle("Speak");
@@ -90,8 +90,18 @@ public class TamagotchiController implements Initializable, Runnable {
 
     @FXML
     private void onTeachButtonClick() {
-        //FIXME: Temporary
-        tamagotchi.teachPhrase("Hello!");
+        // Create a new window and open it
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/teach-alert.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 300, 120);
+
+            Stage stage = new Stage();
+            stage.setTitle("Teach");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         updateLabels();
     }
