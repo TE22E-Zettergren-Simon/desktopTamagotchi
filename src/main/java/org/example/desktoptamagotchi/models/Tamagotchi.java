@@ -1,4 +1,4 @@
-package org.example.desktoptamagotchi;
+package org.example.desktoptamagotchi.models;
 
 import java.util.ArrayList;
 import java.util.Random;

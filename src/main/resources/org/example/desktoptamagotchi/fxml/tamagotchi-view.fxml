@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.desktoptamagotchi.TamagotchiController">
+      fx:controller="org.example.desktoptamagotchi.controllers.TamagotchiController">
 
     <Label fx:id="nameLabel"/>
     <Label fx:id="hungerLabel"/>

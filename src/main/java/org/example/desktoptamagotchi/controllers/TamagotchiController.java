@@ -1,9 +1,11 @@
-package org.example.desktoptamagotchi;
+package org.example.desktoptamagotchi.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import org.example.desktoptamagotchi.models.NameHolder;
+import org.example.desktoptamagotchi.models.Tamagotchi;
 
 import java.net.URL;
 import java.util.ResourceBundle;

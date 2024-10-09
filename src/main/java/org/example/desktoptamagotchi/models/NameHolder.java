@@ -1,4 +1,4 @@
-package org.example.desktoptamagotchi;
+package org.example.desktoptamagotchi.models;
 
 // A singleton used for sharing the name of a Tamagotchi between controllers
 public final class NameHolder {
