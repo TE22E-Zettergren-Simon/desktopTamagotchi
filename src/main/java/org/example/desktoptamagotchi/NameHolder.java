@@ -1,6 +1,6 @@
 package org.example.desktoptamagotchi;
 
-// A singleton used for sending the name of the first tamagotchi from the start screen to the tamagotchi screen
+// A singleton used for sharing the name of a Tamagotchi between controllers
 public final class NameHolder {
     private String name;
     private static final NameHolder instance = new NameHolder();

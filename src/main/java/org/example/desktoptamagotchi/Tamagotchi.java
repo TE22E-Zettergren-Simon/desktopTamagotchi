@@ -3,7 +3,7 @@ package org.example.desktoptamagotchi;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tamagotchi implements Runnable {
+public class Tamagotchi {
     private final String name;
     private int hunger = 3;
     private int boredom = 3;
@@ -15,29 +15,13 @@ public class Tamagotchi implements Runnable {
     public Tamagotchi(String name) {
         this.name = name;
         vocabulary.add("Hi!");
-
-        new Thread(this).start();
     }
 
 
     // Computer controlled actions
 
-    // Periodically tick the Tamagotchi whilst it's alive
-    @Override
-    public void run() {
-        while (isAlive) {
-            tick();
-
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                break;
-            }
-        }
-    }
-
     // Increase hunger and boredom and check if the Tamagotchi is still alive
-    private void tick() {
+    public void tick() {
         hunger++;
         boredom++;
 
