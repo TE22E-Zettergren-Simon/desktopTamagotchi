@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.example.desktoptamagotchi.models.Tamagotchi;
-import org.example.desktoptamagotchi.models.TamagotchiHolder;
+import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +17,7 @@ public class SpeakController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Tamagotchi tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
+        Tamagotchi tamagotchi = TamagotchisHolder.getInstance().getCurrentTamagotchi();
         label.setText(tamagotchi.getName() + " says \"" + tamagotchi.speak() + "\"");
     }
 

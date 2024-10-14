@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.desktoptamagotchi.MainApplication;
-import org.example.desktoptamagotchi.models.TamagotchiHolder;
+import org.example.desktoptamagotchi.models.TamagotchisHolder;
 import org.example.desktoptamagotchi.models.Tamagotchi;
 import org.example.desktoptamagotchi.models.TamagotchiState;
 
@@ -36,7 +36,7 @@ public class TamagotchiController implements Initializable, Runnable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get the tamagotchi from the singleton
-        tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
+        tamagotchi = TamagotchisHolder.getInstance().getCurrentTamagotchi();
 
         nameLabel.setText(tamagotchi.getName());
         updateLabels();

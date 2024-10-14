@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.desktoptamagotchi.models.Tamagotchi;
-import org.example.desktoptamagotchi.models.TamagotchiHolder;
+import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +22,7 @@ public class TeachController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tamagotchi = TamagotchiHolder.getInstance().getTamagotchi();
+        tamagotchi = TamagotchisHolder.getInstance().getCurrentTamagotchi();
 
         label.setText("What will you teach " + tamagotchi.getName() + "?");
     }

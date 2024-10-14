@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml"
@@ -14,7 +15,13 @@
 
     <ImageView x="150.0" y="150.0" fx:id="imageView"/>
 
-    <Button onAction="#onFeedButtonClick" text="Feed"/>
-    <Button onAction="#onSpeakButtonClick" text="Speak"/>
-    <Button onAction="#onTeachButtonClick" text="Teach"/>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button onAction="#onFeedButtonClick" text="Feed"/>
+        <Button onAction="#onSpeakButtonClick" text="Speak"/>
+        <Button onAction="#onTeachButtonClick" text="Teach"/>
+    </HBox>
+
+    <Label/> <!-- Makeshift linebreak -->
+
+    <Button text="View your Tamagotchis"/>
 </VBox>

@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.desktoptamagotchi.MainApplication;
-import org.example.desktoptamagotchi.models.TamagotchiHolder;
+import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -22,7 +22,7 @@ public class DeadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get and set name of Tamagotchi
-        String name = TamagotchiHolder.getInstance().getTamagotchi().getName();
+        String name = TamagotchisHolder.getInstance().getCurrentTamagotchi().getName();
         label.setText(name + " has died");
 
         // Get and set image of dead Tamagotchi
