@@ -9,7 +9,7 @@ import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
 import java.io.IOException;
 
-public class IndexController {
+public class NewTamagotchiController {
     @FXML
     private TextField textField;
 
@@ -23,8 +23,15 @@ public class IndexController {
             return;
         }
 
-        // Set the singleton
-        TamagotchisHolder.getInstance().addTamagotchi(new Tamagotchi(name));
+        try {
+            // Set the singleton
+            TamagotchisHolder.getInstance().addTamagotchi(new Tamagotchi(name));
+        } catch (IllegalArgumentException e) {
+            textField.setText("That name is taken");
+            textField.requestFocus();
+            textField.selectAll();
+            return;
+        }
 
         // Switch scene
         try {
