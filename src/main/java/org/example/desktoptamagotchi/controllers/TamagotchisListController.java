@@ -25,13 +25,13 @@ public class TamagotchisListController implements Initializable {
 
         for (Tamagotchi tamagotchi : tamagotchis) {
             Button button = new Button(tamagotchi.getName());
-            button.setOnAction(this::onTamagotchiClicked);
+            button.setOnAction(this::onTamagotchiClick);
 
             list.getChildren().add(button);
         }
     }
 
-    private void onTamagotchiClicked(ActionEvent event) {
+    private void onTamagotchiClick(ActionEvent event) {
         String tamagotchiName = ((Button) event.getSource()).getText();
         TamagotchisHolder.getInstance().setCurrentTamagotchiName(tamagotchiName);
 
@@ -41,6 +41,19 @@ public class TamagotchisListController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
 
+        }
+    }
+
+
+    // User actions
+
+    @FXML
+    private void onAddNewTamagotchiClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/new-tamagotchi-view.fxml"));
+            list.getScene().setRoot(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
