@@ -30,6 +30,7 @@ public class TamagotchiController implements Initializable, Runnable {
     private ImageView imageView;
 
     Tamagotchi tamagotchi;
+    Thread updateThread;
 
 
     // Called when a fxml tag connects to this controller
@@ -41,7 +42,8 @@ public class TamagotchiController implements Initializable, Runnable {
         nameLabel.setText(tamagotchi.getName());
         updateLabels();
 
-        new Thread(this).start();
+        updateThread = new Thread(this);
+        updateThread.start();
     }
 
 
@@ -50,14 +52,12 @@ public class TamagotchiController implements Initializable, Runnable {
         while (tamagotchi.getState() != TamagotchiState.DEAD) {
             // Wait some time before updating
             try {
-                //FIXME: Ticks faster for testing purposes
-                Thread.sleep(3000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
-                break;
+                return;
             }
 
             // Update
-            tamagotchi.tick();
             Platform.runLater(this::updateLabels);
 
             // Platform.runLater schedules a method to run later on the application thread
@@ -114,6 +114,17 @@ public class TamagotchiController implements Initializable, Runnable {
         updateLabels();
     }
 
+    @FXML
+    private void onToTamagotchiListClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/tamagotchis-list-view.fxml"));
+            nameLabel.getScene().setRoot(fxmlLoader.load());
+            close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     // Internal helpers
 
@@ -132,8 +143,14 @@ public class TamagotchiController implements Initializable, Runnable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/dead-view.fxml"));
             nameLabel.getScene().setRoot(fxmlLoader.load());
+            close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // Stops the updating
+    public void close() {
+        updateThread.interrupt();
     }
 }

@@ -23,5 +23,5 @@
 
     <Label/> <!-- Makeshift linebreak -->
 
-    <Button text="View your Tamagotchis"/>
+    <Button onAction="#onToTamagotchiListClick" text="View your Tamagotchis"/>
 </VBox>

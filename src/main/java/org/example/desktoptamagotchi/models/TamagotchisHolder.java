@@ -1,5 +1,6 @@
 package org.example.desktoptamagotchi.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 // A singleton used for sharing the Tamagotchi between controllers
@@ -15,8 +16,8 @@ public final class TamagotchisHolder {
         return instance;
     }
 
-    public Tamagotchi getTamagotchi(String name) {
-        return tamagotchis.get(name);
+    public ArrayList<Tamagotchi> getTamagotchis() {
+        return new ArrayList<>(tamagotchis.values());
     }
 
     public Tamagotchi getCurrentTamagotchi() {

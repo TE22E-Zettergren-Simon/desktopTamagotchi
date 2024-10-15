@@ -3,7 +3,7 @@ package org.example.desktoptamagotchi.models;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tamagotchi {
+public class Tamagotchi implements Runnable {
     private final String name;
     private int hunger = 3;
     private int boredom = 3;
@@ -15,10 +15,25 @@ public class Tamagotchi {
     public Tamagotchi(String name) {
         this.name = name;
         vocabulary.add("Hi!");
+
+        new Thread(this).start();
     }
 
 
     // Computer controlled actions
+
+    @Override
+    public void run() {
+        while (state != TamagotchiState.DEAD) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                break;
+            }
+
+            tick();
+        }
+    }
 
     // Increase hunger and boredom and check if the Tamagotchi is still alive
     public void tick() {
