@@ -1,16 +1,15 @@
 package org.example.desktoptamagotchi.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.desktoptamagotchi.MainApplication;
+import org.example.desktoptamagotchi.Util;
 import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,11 +42,6 @@ public class DeadController implements Initializable {
     private void onRemoveTamagotchiClick() {
         TamagotchisHolder.getInstance().removeTamagotchi(name);
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/tamagotchis-list-view.fxml"));
-            label.getScene().setRoot(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Util.switchView("fxml/tamagotchis-list-view.fxml", label.getScene());
     }
 }

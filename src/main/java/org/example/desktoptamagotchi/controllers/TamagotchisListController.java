@@ -2,15 +2,13 @@ package org.example.desktoptamagotchi.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import org.example.desktoptamagotchi.MainApplication;
+import org.example.desktoptamagotchi.Util;
 import org.example.desktoptamagotchi.models.Tamagotchi;
 import org.example.desktoptamagotchi.models.TamagotchisHolder;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,6 +21,7 @@ public class TamagotchisListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<Tamagotchi> tamagotchis = TamagotchisHolder.getInstance().getTamagotchis();
 
+        // Loops through all tamagotchis and creates a button for each one
         for (Tamagotchi tamagotchi : tamagotchis) {
             Button button = new Button(tamagotchi.getName());
             button.setOnAction(this::onTamagotchiClick);
@@ -31,29 +30,19 @@ public class TamagotchisListController implements Initializable {
         }
     }
 
+
+    // User actions
+
     private void onTamagotchiClick(ActionEvent event) {
         String tamagotchiName = ((Button) event.getSource()).getText();
         TamagotchisHolder.getInstance().setCurrentTamagotchiName(tamagotchiName);
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/tamagotchi-view.fxml"));
-            list.getScene().setRoot(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-
-        }
+        Util.switchView("fxml/tamagotchi-view.fxml", list.getScene());
     }
 
 
-    // User actions
-
     @FXML
     private void onAddNewTamagotchiClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/new-tamagotchi-view.fxml"));
-            list.getScene().setRoot(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Util.switchView("fxml/new-tamagotchi-view.fxml", list.getScene());
     }
 }

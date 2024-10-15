@@ -2,19 +2,16 @@ package org.example.desktoptamagotchi.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import org.example.desktoptamagotchi.MainApplication;
+import org.example.desktoptamagotchi.Util;
 import org.example.desktoptamagotchi.models.TamagotchisHolder;
 import org.example.desktoptamagotchi.models.Tamagotchi;
 import org.example.desktoptamagotchi.models.TamagotchiState;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +30,7 @@ public class TamagotchiController implements Initializable, Runnable {
     Thread updateThread;
 
 
-    // Called when a fxml tag connects to this controller
+    // Almost a constructor
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get the tamagotchi from the singleton
@@ -80,49 +77,22 @@ public class TamagotchiController implements Initializable, Runnable {
 
     @FXML
     private void onSpeakButtonClick() {
-        // Create a new window and open it
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/speak-alert.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 300, 120);
-
-            Stage stage = new Stage();
-            stage.setTitle("Speak");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Util.createNewWindow("fxml/speak-alert.fxml", "Speak", 280, 120);
 
         updateLabels();
     }
 
     @FXML
     private void onTeachButtonClick() {
-        // Create a new window and open it
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/teach-alert.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 300, 120);
-
-            Stage stage = new Stage();
-            stage.setTitle("Teach");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Util.createNewWindow("fxml/teach-alert.fxml", "Teach", 280, 120);
 
         updateLabels();
     }
 
     @FXML
     private void onToTamagotchiListClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/tamagotchis-list-view.fxml"));
-            nameLabel.getScene().setRoot(fxmlLoader.load());
-            close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        close();
+        Util.switchView("fxml/tamagotchis-list-view.fxml", nameLabel.getScene());
     }
 
 
@@ -140,13 +110,8 @@ public class TamagotchiController implements Initializable, Runnable {
     }
 
     private void switchToDeadScene() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/dead-view.fxml"));
-            nameLabel.getScene().setRoot(fxmlLoader.load());
-            close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        close();
+        Util.switchView("fxml/dead-view.fxml", nameLabel.getScene());
     }
 
     // Stops the updating

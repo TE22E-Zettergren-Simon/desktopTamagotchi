@@ -1,20 +1,12 @@
 package org.example.desktoptamagotchi;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fxml/new-tamagotchi-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 540);
-        stage.setTitle("Tamagotchi");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage) {
+        Util.createNewWindow("fxml/new-tamagotchi-view.fxml", "Tamagotchi Game", 320, 540);
     }
 
     public static void main(String[] args) {
